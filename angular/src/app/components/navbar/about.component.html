@@ -1,0 +1,18 @@
+<div class="modal-header">
+  <h4 class="modal-title">Qu'est-ce que Comme Chez Soi ?</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <p>Ce site est une réécriture complète de <a href="https://github.com/axeleroy/untoitpourcaramel">#UnToitPourCaramel</a>, mon outil dévéloppé
+    fin 2016 en Python afin de faciliter ma recherche de logement.</p>
+  <p>Après avoir trouvé grâce à lui l'appartement de mes rêves en moins d'une semaine, plusieurs de mes amis furent intéressés pour l'utiliser.
+    Cependant, l'installation et l'utilisation de celui-ci étaient peu triviales pour ceux qui
+    avaient peu expérience technique.</p>
+  <p>Fin 2017, j'ai donc entrepris de réécrire complétement cette application afin de la rendre accessible à tous à partir d'un simple navigateur web.</p>
+</div>
+<div class="modal-footer">
+  <a href="https://github.com/axeleroy/commechezsoi" class="btn btn-primary" ><i class="fa fa-github"></i> Code source</a>
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Fermer</button>
+</div>

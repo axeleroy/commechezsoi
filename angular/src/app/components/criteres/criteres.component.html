@@ -1,0 +1,167 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+      <app-cities></app-cities>
+    </div>
+
+    <div class="col-sm">
+      <h5>Type d'annonce</h5>
+      <div *ngFor="let choice of annonceTypes" class="form-check">
+        <label class="form-check-label">
+          <input [(ngModel)]="criteresService.criteres.type" [value]="choice" [checked]="criteresService.criteres.type == choice"
+                 (ngModelChange)="criteresService.criteresChanged()" class="form-check-input" type="radio" name="typeAnnonce" id="location">
+          {{AnnonceType[choice]}}
+        </label>
+      </div>
+    </div>
+
+    <div class="col-sm">
+      <h5>Sources</h5>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" [(ngModel)]="criteresService.bienici" (ngModelChange)="criteresService.criteresChanged()"
+               id="bienici" disabled>
+        <label class="form-check-label" for="bienici">
+          Bien'ici
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" [(ngModel)]="criteresService.leboncoin" (ngModelChange)="criteresService.criteresChanged()"
+               id="leboncoin">
+        <label class="form-check-label" for="leboncoin">
+          Leboncoin
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" [(ngModel)]="criteresService.logicimmo" (ngModelChange)="criteresService.criteresChanged()"
+               id="logicimmo" disabled>
+        <label class="form-check-label" for="logicimmo">
+          Logic Immo
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input " type="checkbox" [(ngModel)]="criteresService.pap" (ngModelChange)="criteresService.criteresChanged()"
+               id="pap" disabled>
+        <label class="form-check-label" for="pap">
+          PAP
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" [(ngModel)]="criteresService.seloger" (ngModelChange)="criteresService.criteresChanged()"
+               id="seloger" disabled>
+        <label class="form-check-label" for="seloger">
+          SeLoger
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <br />
+
+  <div class="row">
+  <div class="col-sm">
+    <h5>
+    <span *ngIf="criteresService.criteres.type == 0; then loyer else prix"></span>
+    <ng-template #loyer>Loyer</ng-template>
+    <ng-template #prix>Prix</ng-template>
+    </h5>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Min</span>
+        </div>
+      <input [(ngModel)]="criteresService.criteres.minPrice" (ngModelChange)="criteresService.criteresChanged()" type="number" class="form-control"
+             aria-label="Loyer minimal">
+      <div class="input-group-append">
+        <span class="input-group-text">€</span>
+        </div>
+      </div>
+    <br>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Max</span>
+        </div>
+      <input [(ngModel)]="criteresService.criteres.maxPrice" (ngModelChange)="criteresService.criteresChanged()" type="number" class="form-control"
+             aria-label="Loyer maximal">
+      <div class="input-group-append">
+        <span class="input-group-text">€</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm">
+      <h5>Surface</h5>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Min</span>
+        </div>
+        <input [(ngModel)]="criteresService.criteres.minSurface" (ngModelChange)="criteresService.criteresChanged()" type="number" class="form-control"
+               aria-label="Surface minimale">
+        <div class="input-group-append">
+          <span class="input-group-text">m²</span>
+        </div>
+      </div>
+      <br>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Max</span>
+        </div>
+        <input [(ngModel)]="criteresService.criteres.maxSurface" (ngModelChange)="criteresService.criteresChanged()" type="number" class="form-control"
+               aria-label="Surface maximale">
+        <div class="input-group-append">
+          <span class="input-group-text">m²</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm">
+      <h5>Pièces</h5>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Min</span>
+        </div>
+        <input [(ngModel)]="criteresService.criteres.minRooms" (ngModelChange)="criteresService.criteresChanged()" type="number" class="form-control"
+               aria-label="Nombre minimal de pièces">
+      </div>
+      <br>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Max</span>
+        </div>
+        <input [(ngModel)]="criteresService.criteres.maxRooms" (ngModelChange)="criteresService.criteresChanged()" type="number" class="form-control"
+               aria-label="Nombre maximal de pièces">
+      </div>
+    </div>
+
+    <div class="col-sm">
+      <h5>Chambres</h5>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Min</span>
+        </div>
+        <input [(ngModel)]="criteresService.criteres.minBedrooms" (ngModelChange)="criteresService.criteresChanged()" type="number" class="form-control"
+               aria-label="Nombre minimal de chambres" [attr.disabled]="criteresService.seloger || criteresService.logicimmo || criteresService.pap">
+      </div>
+      <br>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Min</span>
+        </div>
+        <input [(ngModel)]="criteresService.criteres.maxBedrooms" (ngModelChange)="criteresService.criteresChanged()" type="number" class="form-control"
+               aria-label="Nombre maximal de chambres" [attr.disabled]="criteresService.seloger || criteresService.logicimmo || criteresService.pap">
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+  <ngb-accordion #acc="ngbAccordion">
+    <ngb-panel>
+      <ng-template ngbPanelTitle>
+        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+        Critères supplémentaires
+      </ng-template>
+      <ng-template ngbPanelContent>
+        Coming <i>Soon&trade;</i>
+      </ng-template>
+    </ngb-panel>
+  </ngb-accordion>
+</div>

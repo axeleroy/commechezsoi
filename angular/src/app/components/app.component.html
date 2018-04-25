@@ -1,0 +1,16 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <ngb-alert *ngIf="!lsTest() || dbTest()" [dismissible]="false">
+    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+    <strong>Attention :</strong> le stockage local du navigateur n'est pas disponible, toutes vos données seront perdues
+    à la fermeture du navigateur.
+  </ngb-alert>
+  <ngb-alert *ngIf="lsTest() && !closed" (close)="setClosed()">
+    <i class="fa fa-info-circle" aria-hidden="true"></i>
+    <strong>Attention :</strong> de part la nature de cette application, les paramètres et annonces ne peuvent être
+    synchronisés entre différents navigateurs.
+  </ngb-alert>
+</div>
+<app-criteres></app-criteres>
+<app-fetch></app-fetch>
+<app-annonces-list></app-annonces-list>

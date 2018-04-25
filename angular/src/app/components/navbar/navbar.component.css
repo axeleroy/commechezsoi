@@ -1,0 +1,13 @@
+nav {
+  margin-bottom: 10px;
+}
+
+.navbar-brand {
+  line-height:12px;
+  padding-bottom:5px;
+}
+
+.navbar-brand small {
+  display:block;
+  font-size:10px;
+}
