@@ -1,0 +1,22 @@
+.jumbotron {
+  background-color: aliceblue;
+  margin-top: 15px;
+  margin-bottom: 0;
+}
+
+.card-img-overlay {
+  opacity: 0;
+  padding: 0 0.75rem;
+}
+
+.close {
+  color: lightcoral;
+  font-size: 2.5rem;
+  font-weight: 400;
+  opacity: 1;
+  text-shadow: none;
+}
+
+.card:hover .card-img-overlay {
+  opacity: 1;
+}

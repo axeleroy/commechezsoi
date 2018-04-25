@@ -1,0 +1,7 @@
+.p-2 p {
+  margin-bottom: 0;
+}
+
+.p-2 {
+  padding-bottom: 0 !important;
+}

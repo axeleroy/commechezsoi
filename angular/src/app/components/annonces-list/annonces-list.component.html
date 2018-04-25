@@ -1,0 +1,43 @@
+<div class="jumbotron">
+  <div class="container">
+    <div class="row">
+      <div *ngFor="let annonce of annonces" class="col-sm-4 py-2">
+        <div class="card" (click)="open(annonce)">
+          <div *ngIf="annonce.pictures">
+            <img class="card-img-top img-fluid" src="{{annonce.pictures[0]}}">
+          </div>
+          <div class="card-img-overlay">
+            <button type="button" class="close pull-right" aria-label="Close" (click)="delete($event, annonce)">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="card-body">
+            <h4 class="card-title">{{annonce.title}}</h4>
+
+            <p class="card-text">
+            <span class="badge badge-primary">
+              <i class="fa fa-globe" aria-hidden="true"></i> {{annoncesService.getSite(annonce)}}
+            </span>
+
+            <span class="badge badge-primary">
+              <i class="fa fa-map-marker" aria-hidden="true"></i> {{annonce.city}}
+            </span>
+
+              <span class="badge badge-primary">
+              <i class="fa fa-crop" aria-hidden="true"></i> {{annonce.surface}}m²
+            </span>
+
+              <span class="badge badge-primary">
+              <i class="fa fa-eur" aria-hidden="true"></i> {{annonce.price}}€
+            </span>
+
+              <span class="badge badge-primary">
+              <i class="fa fa-calendar" aria-hidden="true"></i> {{annonce.created | date:'mediumDate':'':'fr'}}
+            </span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

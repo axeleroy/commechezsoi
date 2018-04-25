@@ -1,0 +1,17 @@
+<h5>Villes</h5>
+
+<ng-template #rt let-r="result" let-t="term">
+  {{r.code}} ⋅ {{r.city}}
+</ng-template>
+
+<input #input id="typeahead" type="text" class="form-control" (selectItem)="selectItem($event, input)" [ngbTypeahead]="search"
+       [resultTemplate]="rt" placeholder="Rechercher une ville" />
+
+<ul class="list-group list-group-flush">
+  <li *ngFor="let city of criteres.cities" class="list-group-item">
+    {{city.postcode}} ⋅ {{city.name}}
+    <button type="button" class="close pull-right" aria-label="Close" (click)="removeCity(city)">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </li>
+</ul>

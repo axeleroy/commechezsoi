@@ -1,0 +1,23 @@
+service: untoit
+provider:
+  name: aws
+  runtime: java8
+  memorySize: 1024
+  timeout: 240
+package:
+  artifact: target/awslambda-1.0-SNAPSHOT.jar
+functions:
+  leboncoinlist:
+    handler: sh.leroy.axel.commechezsoi.awslambda.handler.LeboncoinListHandler
+    events:
+        - http:
+            path: leboncoinlist
+            method: post
+            cors: true
+  leboncoinview:
+      handler: sh.leroy.axel.commechezsoi.awslambda.handler.LeboncoinViewHandler
+      events:
+          - http:
+              path: leboncoinview
+              method: post
+              cors: true
