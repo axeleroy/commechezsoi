@@ -70,7 +70,7 @@ export class CitiesComponent implements OnInit {
   addCity(name: string, postcode: number, insee: number): void {
     if (name && postcode && insee) {
       const city = new City();
-      city.name = name;
+      city.name = name.toLowerCase();
       city.postcode = postcode;
       city.insee = insee;
 
