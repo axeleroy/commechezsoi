@@ -19,6 +19,7 @@ export class AboutContent {
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  isNavbarCollapsed=true;
 
   constructor(private modalService: NgbModal,
               public criteresService: CriteresService,
