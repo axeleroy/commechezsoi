@@ -16,8 +16,8 @@ export interface Annonce {
 }
 
 export enum Site {
-  Leboncoin,
-  LogicImmo,
-  SeLoger,
-  PaP
+  Leboncoin = "Leboncoin",
+  LogicImmo = "Logicimmo",
+  SeLoger = "SeLoger",
+  PaP = "PAP"
 }
