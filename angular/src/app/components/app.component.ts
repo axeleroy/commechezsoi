@@ -8,6 +8,8 @@ import {PersistenceService, StorageType} from "angular-persistence";
 })
 export class AppComponent {
   closed: boolean;
+  isScreenSmall = window.innerWidth < 500;
+  isCollapsed = this.isScreenSmall;
 
   constructor(protected service: PersistenceService) {
     try {

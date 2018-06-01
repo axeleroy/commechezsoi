@@ -12,7 +12,13 @@
   </ngb-alert>
 </div>
 <div class="jumbotron">
-  <app-criteres></app-criteres>
-  <app-fetch></app-fetch>
+  <button type="button" class="btn btn-primary btn-block" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
+          aria-controls="collapse" [hidden]="!isScreenSmall">
+    Afficher / masquer les critères
+  </button>
+  <div id="collapse" [ngbCollapse]="isCollapsed">
+    <app-criteres></app-criteres>
+    <app-fetch></app-fetch>
+  </div>
 </div>
 <app-annonces-list></app-annonces-list>
