@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule} from "@angular/forms";
 import {PersistenceModule} from 'angular-persistence';
 import {HttpClientModule} from "@angular/common/http";
@@ -20,6 +20,7 @@ import {CitiesComponent} from './components/criteres/cities/cities.component';
 import {OrderAnnonceByDatePipe} from './pipes/order-by-date.pipe';
 import {AnnonceDatabase} from "./model/annonce/annoncedb";
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
+import { AnnonceInfoComponent } from './components/annonce-info/annonce-info.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -35,6 +36,7 @@ registerLocaleData(localeFr, 'fr');
     CitiesComponent,
     OrderAnnonceByDatePipe,
     SafeHtmlPipe,
+    AnnonceInfoComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +45,7 @@ registerLocaleData(localeFr, 'fr');
     HttpClientModule,
     NgbModule.forRoot()
   ],
-  providers: [AnnonceDatabase, CriteresService, AnnoncesService, FetchService],
+  providers: [AnnonceDatabase, CriteresService, AnnoncesService, FetchService, NgbActiveModal],
   bootstrap: [AppComponent],
   entryComponents: [AnnonceDetailComponent, AboutContent]
 })

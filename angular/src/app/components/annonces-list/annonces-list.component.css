@@ -8,13 +8,8 @@
   margin-bottom: 0;
 }
 
-.card-info, .card-additional-info {
-  color: gray;
-  font-size: 1.3rem;
-}
-
-.card-additional-info {
-  margin-top: .5rem;
+a {
+  color: #7b9aba;
 }
 
 .card-info-footer {

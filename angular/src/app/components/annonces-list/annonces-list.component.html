@@ -12,22 +12,8 @@
         </div>
         <div class="card-body">
           <h4 class="card-title">{{annonce.title}}</h4>
-
           <hr/>
-
-          <div class="row card-info">
-            <div class="col">{{annonce.price}}€</div>
-            <div class="col">{{annonce.surface}}m²</div>
-            <div class="col"><span class="font-weight-light">{{annonce.city}}</span></div>
-          </div>
-
-          <div class="row card-additional-info">
-            <div class="col"><i class="fa fa-lightbulb-o font-weight-light" aria-hidden="true"></i> {{annonce.rooms}} <span class="font-weight-light">Pièces</span></div>
-            <div *ngIf="annonce.bedrooms">
-              <div class="col"><i class="fa fa-bed font-weight-light" aria-hidden="true"></i> {{annonce.bedrooms}} <span class="font-weight-light">Chambres</span></div>
-            </div>
-          </div>
-
+          <app-annonce-info [annonce]="annonce"></app-annonce-info>
         </div>
 
         <div class="card-footer text-muted">
@@ -36,7 +22,7 @@
               <i class="fa fa-calendar" aria-hidden="true"></i> {{annonce.created | date:'mediumDate':'':'fr'}}
             </div>
             <div class="col">
-              <i class="fa fa-globe" aria-hidden="true"></i> {{annonce.site}}
+              <a href="{{annonce.link}}" class="text-muted"><i class="fa fa-globe" aria-hidden="true"></i> {{annonce.site}}</a>
             </div>
           </div>
         </div>
