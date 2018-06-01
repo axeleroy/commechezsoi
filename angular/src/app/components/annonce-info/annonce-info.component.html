@@ -1,0 +1,30 @@
+<div class="row card-info">
+  <div class="col">{{annonce.price}}€</div>
+  <div class="col">{{annonce.surface}} m²</div>
+  <div class="col"><span class="font-weight-light">{{annonce.city}}</span></div>
+</div>
+
+<div class="row card-additional-info">
+  <div class="col">
+    <i class="fa fa-lightbulb-o font-weight-light" aria-hidden="true"></i> {{annonce.rooms}} <span class="font-weight-light">Pièces</span>
+  </div>
+  <div *ngIf="annonce.bedrooms" class="col">
+    <i class="fa fa-bed font-weight-light" aria-hidden="true"></i> {{annonce.bedrooms}} <span class="font-weight-light">Chambres</span>
+  </div>
+  <div *ngIf="isDetail && annonce.charges" class="col">
+    <i class="fa fa-money font-weight-light" aria-hidden="true"></i> {{annonce.charges}}€  <span class="font-weight-light">Charges</span>
+  </div>
+  <div *ngIf="isDetail" class="col">
+    <i class="fa fa-phone font-weight-light" aria-hidden="true"></i> {{annonce.telephone}}
+  </div>
+</div>
+
+<div class="row card-additional-info">
+
+  <div *ngIf="isDetail" class="col">
+    <i class="fa fa-calendar font-weight-light" aria-hidden="true"></i> <span class="font-weight-light">{{annonce.created | date:'mediumDate':'':'fr'}}</span>
+  </div>
+  <div *ngIf="isDetail" class="col">
+    <i class="fa fa-globe font-weight-light" aria-hidden="true"></i> <span class="font-weight-light">{{annonce.site}}</span>
+  </div>
+</div>

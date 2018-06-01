@@ -15,6 +15,7 @@ export class AnnonceDetailComponent implements OnInit {
               public annoncesService: AnnoncesService) { }
 
   ngOnInit() {
+    console.log(this.annonce)
   }
 
   delete(): void {

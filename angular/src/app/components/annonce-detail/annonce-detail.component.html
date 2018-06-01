@@ -1,9 +1,3 @@
-<div class="modal-header">
-  <h4 class="modal-title">{{annonce.title}}</h4>
-  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
 <div class="modal-body">
   <div *ngIf="annonce.pictures">
     <ngb-carousel>
@@ -15,107 +9,13 @@
     </ngb-carousel>
   </div>
 
-  <div class="d-flex flex-wrap">
-    <div class="p-2">
-      <p>
-        <span class="badge badge-secondary">
-          <i class="fa fa-globe" aria-hidden="true"></i>
-            Site :
-        </span>
-        {{annoncesService.getSite(annonce)}}
-      </p>
-    </div>
-
-    <div class="p-2">
-      <p>
-        <span class="badge badge-secondary">
-          <i class="fa fa-map-marker" aria-hidden="true"></i>
-          Ville :
-        </span>
-        {{annonce.city}}
-      </p>
-    </div>
-
-    <div class="p-2">
-      <p>
-        <span class="badge badge-secondary">
-          <i class="fa fa-crop" aria-hidden="true"></i>
-          Surface :
-        </span>
-        {{annonce.surface}}m²
-      </p>
-    </div>
-
-    <div class="p-2">
-      <p>
-        <span class="badge badge-secondary">
-          <i class="fa fa-euro" aria-hidden="true"></i>
-          Prix :
-        </span>
-        {{annonce.price}}€
-      </p>
-    </div>
-
-    <div *ngIf="annonce.charges" class="p-2">
-      <p>
-        <span class="badge badge-secondary">
-          <i class="fa fa-money" aria-hidden="true"></i>
-          Charges :
-        </span>
-        {{annonce.charges}}€
-      </p>
-    </div>
-  </div>
-
-  <div class="d-flex flex-wrap">
-    <div class="p-2">
-      <p>
-        <span class="badge badge-secondary">
-          <i class="fa fa-map-marker" aria-hidden="true"></i>
-          Pièces :
-        </span>
-        {{annonce.rooms}}
-      </p>
-    </div>
-
-    <div *ngIf="annonce.bedrooms" class="p-2">
-      <p>
-        <span class="badge badge-secondary">
-          <i class="fa fa-bed" aria-hidden="true"></i>
-          Chambres :
-        </span>
-        {{annonce.bedrooms}}
-      </p>
-    </div>
-
-    <div class="p-2">
-      <p>
-        <span class="badge badge-secondary">
-          <i class="fa fa-phone" aria-hidden="true"></i>
-          Téléphone :
-        </span>
-        {{annonce.telephone}}
-      </p>
-    </div>
-  </div>
-
+  <h4 class="title">{{annonce.title}}</h4>
   <hr />
-
+  <app-annonce-info [annonce]="annonce" [isDetail]="true"></app-annonce-info>
+  <hr />
   <div [innerHTML]="annonce.description | safeHtml"></div>
-
-
 </div>
 <div class="modal-footer">
-  <div class="pull-left">
-    <p>
-      <span class="badge badge-light">
-        <i class="fa fa-clock-o" aria-hidden="true"></i>
-        Créé le :
-      </span>
-      <small>{{annonce.created | date:'full'}}</small>
-    </p>
-  </div>
-
   <button type="button" class="btn btn-danger" (click)="delete()">Supprimer</button>
   <a [href]="annonce.link" target="_blank" class="btn btn-primary">Ouvrir l'annonce</a>
   <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Fermer</button>
