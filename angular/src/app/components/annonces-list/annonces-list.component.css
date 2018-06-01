@@ -1,6 +1,24 @@
 .jumbotron {
   background-color: aliceblue;
-  margin-top: 15px;
+  margin-top: 1rem;
+  padding-top: 1rem
+}
+
+.card-title {
+  margin-bottom: 0;
+}
+
+.card-info, .card-additional-info {
+  color: gray;
+  font-size: 1.3rem;
+}
+
+.card-additional-info {
+  margin-top: .5rem;
+}
+
+.card-info-footer {
+  color: gray;
 }
 
 .card-img-overlay {

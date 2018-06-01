@@ -66,9 +66,4 @@ export class AnnoncesService {
       console.log(e);
     }
   }
-
-  getSite(annonce: Annonce): string {
-    const siteTypes = (<any>Object).values(Site).filter(e => typeof(e) == 'number');
-    return siteTypes[annonce.site];
-  }
 }

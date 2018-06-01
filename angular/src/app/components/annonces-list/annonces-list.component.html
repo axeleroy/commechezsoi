@@ -13,27 +13,32 @@
         <div class="card-body">
           <h4 class="card-title">{{annonce.title}}</h4>
 
-          <p class="card-text">
-            <span class="badge badge-primary">
-              <i class="fa fa-globe" aria-hidden="true"></i> {{annoncesService.getSite(annonce)}}
-            </span>
+          <hr/>
 
-            <span class="badge badge-primary">
-              <i class="fa fa-map-marker" aria-hidden="true"></i> {{annonce.city}}
-            </span>
+          <div class="row card-info">
+            <div class="col">{{annonce.price}}€</div>
+            <div class="col">{{annonce.surface}}m²</div>
+            <div class="col"><span class="font-weight-light">{{annonce.city}}</span></div>
+          </div>
 
-            <span class="badge badge-primary">
-              <i class="fa fa-crop" aria-hidden="true"></i> {{annonce.surface}}m²
-            </span>
+          <div class="row card-additional-info">
+            <div class="col"><i class="fa fa-lightbulb-o font-weight-light" aria-hidden="true"></i> {{annonce.rooms}} <span class="font-weight-light">Pièces</span></div>
+            <div *ngIf="annonce.bedrooms">
+              <div class="col"><i class="fa fa-bed font-weight-light" aria-hidden="true"></i> {{annonce.bedrooms}} <span class="font-weight-light">Chambres</span></div>
+            </div>
+          </div>
 
-            <span class="badge badge-primary">
-              <i class="fa fa-eur" aria-hidden="true"></i> {{annonce.price}}€
-            </span>
+        </div>
 
-            <span class="badge badge-primary">
+        <div class="card-footer text-muted">
+          <div class="row">
+            <div class="col">
               <i class="fa fa-calendar" aria-hidden="true"></i> {{annonce.created | date:'mediumDate':'':'fr'}}
-            </span>
-          </p>
+            </div>
+            <div class="col">
+              <i class="fa fa-globe" aria-hidden="true"></i> {{annonce.site}}
+            </div>
+          </div>
         </div>
       </div>
     </div>
