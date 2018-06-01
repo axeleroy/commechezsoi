@@ -101,7 +101,7 @@
 
   <hr />
 
-  <p>{{annonce.description}}</p>
+  <div [innerHTML]="annonce.description | safeHtml"></div>
 
 
 </div>
