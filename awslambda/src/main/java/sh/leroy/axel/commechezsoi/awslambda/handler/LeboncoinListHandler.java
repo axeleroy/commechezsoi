@@ -17,6 +17,7 @@ import org.apache.logging.log4j.Logger;
 import sh.leroy.axel.commechezsoi.awslambda.Constants;
 import sh.leroy.axel.commechezsoi.awslambda.model.ApiGatewayResponse;
 import sh.leroy.axel.commechezsoi.awslambda.model.Criteres;
+import sh.leroy.axel.commechezsoi.awslambda.model.Criteres.AnnonceType;
 
 import java.io.IOException;
 import java.net.URI;
@@ -40,6 +41,7 @@ public class LeboncoinListHandler extends AbstractHandler {
         URI uri;
         try {
              URIBuilder builder = new URIBuilder(Constants.LEBONCOIN_LIST)
+                .addParameter("c", (criteres.type == AnnonceType.Location) ? "10" : "9")
                 .addParameter("mrs", String.valueOf(criteres.minPrice))
                 .addParameter("mre", String.valueOf(criteres.maxPrice))
                 .addParameter("sqs", getSurface(criteres.minSurface))
