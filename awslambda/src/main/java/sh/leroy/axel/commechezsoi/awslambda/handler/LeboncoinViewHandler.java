@@ -76,7 +76,11 @@ public class LeboncoinViewHandler extends AbstractHandler {
                     rooms = node.get("value").asInt();
                 }
                 if (node.get("id").asText().equals("square")) {
-                    surface = Double.parseDouble(node.get("value").asText().replace(" m&sup2;", ""));
+                    final String surfaceString = node.get("value").asText();
+                    final String escapedSurface = surfaceString.replace("m&sup2;", "")
+                            .replace("m²", "")
+                            .trim();
+                    surface = Double.parseDouble(escapedSurface);
                 }
             }
 
