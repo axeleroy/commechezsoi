@@ -15,13 +15,8 @@ export class CriteresService {
   constructor(private persistenceService: PersistenceService) {
     this.criteres = new Criteres();
     try {
-      const saved: Criteres = persistenceService.get('criteres', StorageType.LOCAL);
-      if (saved != null) {
-        /* L'objet issu du service de persistence n'est pas exactement un objet Criteres, il manque notamment ses
-           fonctions et l'énumération AnnonceType
-           Le hack est donc de construire un nouvel objet Criteres à partir des valeurs de l'objet récupéré */
-        this.criteres.setFrom(saved);
-      }
+      this.criteres = new Criteres(persistenceService.get('criteres', StorageType.LOCAL));
+      console.log(this.criteres);
 
       this.bienici = persistenceService.get('bienici', StorageType.LOCAL);
       this.leboncoin = persistenceService.get('leboncoin', StorageType.LOCAL);

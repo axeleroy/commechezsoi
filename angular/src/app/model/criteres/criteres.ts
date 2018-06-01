@@ -12,17 +12,21 @@ export class Criteres {
   maxBedrooms: number;
   type: AnnonceType;
 
-  constructor() {
-    this.cities = [];
-    this.minPrice = 0;
-    this.maxPrice = 0;
-    this.minSurface = 0;
-    this.maxSurface = 0;
-    this.minRooms = 0;
-    this.maxRooms = 0;
-    this.minBedrooms = 0;
-    this.maxBedrooms = 0;
-    this.type = AnnonceType.Location;
+  constructor(obj?) {
+    if (obj) {
+      Object.assign(this, obj);
+    } else {
+      this.cities = [];
+      this.minPrice = 0;
+      this.maxPrice = 0;
+      this.minSurface = 0;
+      this.maxSurface = 0;
+      this.minRooms = 0;
+      this.maxRooms = 0;
+      this.minBedrooms = 0;
+      this.maxBedrooms = 0;
+      this.type = AnnonceType.Location;
+    }
   };
 
   public setFrom(o: Criteres) {
