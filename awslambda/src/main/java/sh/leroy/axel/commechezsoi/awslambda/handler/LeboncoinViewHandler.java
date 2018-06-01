@@ -72,6 +72,7 @@ public class LeboncoinViewHandler extends AbstractHandler {
         try {
             double surface = 0.0;
             int rooms = 0;
+            String city = "";
 
             for (JsonNode node : result.get("parameters")) {
                 if (node.get("id").asText().equals("rooms")) {
@@ -83,6 +84,9 @@ public class LeboncoinViewHandler extends AbstractHandler {
                             .replace("m²", "")
                             .trim();
                     surface = Double.parseDouble(escapedSurface);
+                }
+                if (node.get("id").asText().equals("city")) {
+                    city = node.get("value").asText();
                 }
             }
 
@@ -97,7 +101,7 @@ public class LeboncoinViewHandler extends AbstractHandler {
                         .replace(" ", "")))
                 .setSurface(surface)
                 .setRooms(rooms)
-                .setCity(result.get("zipcode").asText())
+                .setCity(city)
                 .setPictures(mapper.convertValue(result.get("images"), String[].class))
                 .setLink("https://www.leboncoin.fr/vi/" + result.get("list_id").asText() + ".htm");
 
