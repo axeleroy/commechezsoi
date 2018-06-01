@@ -19,6 +19,7 @@ import {FetchService} from "./services/fetch/fetch.service";
 import {CitiesComponent} from './components/criteres/cities/cities.component';
 import {OrderAnnonceByDatePipe} from './pipes/order-by-date.pipe';
 import {AnnonceDatabase} from "./model/annonce/annoncedb";
+import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -33,6 +34,7 @@ registerLocaleData(localeFr, 'fr');
     FetchComponent,
     CitiesComponent,
     OrderAnnonceByDatePipe,
+    SafeHtmlPipe,
   ],
   imports: [
     BrowserModule,
