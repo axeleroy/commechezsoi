@@ -9,8 +9,6 @@
     </ngb-carousel>
   </div>
 
-  <h4 class="title">{{annonce.title}}</h4>
-  <hr />
   <app-annonce-info [annonce]="annonce" [isDetail]="true"></app-annonce-info>
   <hr />
   <div [innerHTML]="annonce.description | safeHtml"></div>
