@@ -16,7 +16,6 @@ export class CriteresService {
     this.criteres = new Criteres();
     try {
       this.criteres = new Criteres(persistenceService.get('criteres', StorageType.LOCAL));
-      console.log(this.criteres);
 
       this.bienici = persistenceService.get('bienici', StorageType.LOCAL);
       this.leboncoin = persistenceService.get('leboncoin', StorageType.LOCAL);
