@@ -13,7 +13,6 @@ export class AnnoncesService {
 
   constructor(private persistenceService: PersistenceService,
               private db: AnnonceDatabase) {
-    console.log(this.db.annonces);
 
     try {
       this.deleted = this.persistenceService.get('deleted', StorageType.LOCAL);
