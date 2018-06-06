@@ -1,10 +1,12 @@
-<div class="row card-info">
+<h4 class="title">{{annonce.title}}</h4>
+<hr />
+<div class="row card-info text-center">
   <div class="col">{{annonce.price}}€</div>
   <div class="col">{{annonce.surface}} m²</div>
   <div class="col"><span class="font-weight-light">{{annonce.city}}</span></div>
 </div>
 
-<div class="row card-additional-info">
+<div class="row card-additional-info text-center">
   <div class="col">
     <i class="fa fa-lightbulb-o font-weight-light" aria-hidden="true"></i> {{annonce.rooms}} <span class="font-weight-light">Pièces</span>
   </div>
@@ -19,12 +21,11 @@
   </div>
 </div>
 
-<div class="row card-additional-info">
-
-  <div *ngIf="isDetail" class="col">
+<div *ngIf="isDetail" class="row card-additional-info text-center">
+  <div class="col">
     <i class="fa fa-calendar font-weight-light" aria-hidden="true"></i> <span class="font-weight-light">{{annonce.created | date:'mediumDate':'':'fr'}}</span>
   </div>
-  <div *ngIf="isDetail" class="col">
+  <div class="col">
     <i class="fa fa-globe font-weight-light" aria-hidden="true"></i> <span class="font-weight-light">{{annonce.site}}</span>
   </div>
 </div>
