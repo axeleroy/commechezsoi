@@ -1,33 +1,35 @@
 package sh.leroy.axel.commechezsoi.awslambda.handler.leboncoin;
 
+import com.amazonaws.services.lambda.runtime.Context;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.io.IOUtils;
+import org.apache.http.Consts;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.entity.ContentType;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.jsoup.Jsoup;
+import sh.leroy.axel.commechezsoi.awslambda.Constants;
+import sh.leroy.axel.commechezsoi.awslambda.handler.AbstractStringHandler;
+import sh.leroy.axel.commechezsoi.awslambda.model.Annonce;
+import sh.leroy.axel.commechezsoi.awslambda.model.ApiGatewayResponse;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
-
-import org.apache.commons.io.IOUtils;
-import org.apache.http.Consts;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.jsoup.Jsoup;
-
-import com.amazonaws.services.lambda.runtime.Context;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import sh.leroy.axel.commechezsoi.awslambda.Constants;
-import sh.leroy.axel.commechezsoi.awslambda.handler.AbstractStringHandler;
-import sh.leroy.axel.commechezsoi.awslambda.model.Annonce;
-import sh.leroy.axel.commechezsoi.awslambda.model.ApiGatewayResponse;
 
 public class LeboncoinViewHandler extends AbstractStringHandler {
     private static final Logger logger = LogManager.getLogger(LeboncoinViewHandler.class);
@@ -50,11 +52,14 @@ public class LeboncoinViewHandler extends AbstractStringHandler {
             return error(500, "Error building URI", e, logger);
         }
 
-        HttpClient client = HttpClientBuilder.create().build();
+        List<NameValuePair> params = new ArrayList<>();
+        params.add(new BasicNameValuePair("app_id", Constants.LEBONCOIN_APPID));
+        params.add(new BasicNameValuePair("key", Constants.LEBONCOIN_TOKEN));
 
+        HttpClient client = HttpClientBuilder.create().build();
         HttpPost post = new HttpPost(adUri);
         post.setHeader("Content-Type", ContentType.APPLICATION_FORM_URLENCODED.getMimeType());
-        post.setEntity(new StringEntity(Constants.LEBONCOIN_TOKEN, Consts.UTF_8));
+        post.setEntity(new UrlEncodedFormEntity(params, Consts.UTF_8));
 
         HttpResponse response;
         try {
@@ -108,8 +113,6 @@ public class LeboncoinViewHandler extends AbstractStringHandler {
 
             if (result.get("body") != null)
                 builder.setDescription(result.get("body").asText());
-            if (result.get("phone") != null)
-                builder.setTelephone(result.get("phone").asText());
 
             return ApiGatewayResponse.builder()
                     .setContentType(ContentType.APPLICATION_JSON.getMimeType())

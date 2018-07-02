@@ -21,3 +21,10 @@ functions:
               path: leboncoinview
               method: post
               cors: true
+  leboncoinphone:
+        handler: sh.leroy.axel.commechezsoi.awslambda.handler.leboncoin.LeboncoinPhoneHandler
+        events:
+            - http:
+                path: leboncoinphone
+                method: post
+                cors: true
