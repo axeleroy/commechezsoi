@@ -28,11 +28,18 @@ export class FetchService {
   }
 
   fetchLeboncoin(): void {
-    this.client.post<String[]>(environment.aws_lambda_endpoint + 'leboncoinlist', this.parametersService.criteres)
+    this.client.post<string[]>(environment.aws_lambda_endpoint + 'leboncoinlist', this.parametersService.criteres)
       .subscribe(ids => {
         for (const id of ids) {
           this.client.post<Annonce>(environment.aws_lambda_endpoint + 'leboncoinview', id)
-            .subscribe(annonce => this.annoncesService.add(annonce));
+            .subscribe(annonce => {
+              this.annoncesService.add(annonce);
+              this.client.post<string>(environment.aws_lambda_endpoint + 'leboncoinphone', annonce.id)
+                .subscribe(phone => {
+                  annonce.telephone = phone;
+                  this.annoncesService.add(annonce);
+                })
+            });
         }
       });
   }

@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  aws_lambda_endpoint: ''
+  aws_lambda_endpoint: 'https://wtn0mfpz96.execute-api.eu-west-2.amazonaws.com/dev/'
 };
