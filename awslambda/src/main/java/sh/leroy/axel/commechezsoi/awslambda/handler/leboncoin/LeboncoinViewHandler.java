@@ -1,4 +1,4 @@
-package sh.leroy.axel.commechezsoi.awslambda.handler;
+package sh.leroy.axel.commechezsoi.awslambda.handler.leboncoin;
 
 import java.io.IOException;
 import java.net.URI;
@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.http.Consts;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -24,11 +25,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import sh.leroy.axel.commechezsoi.awslambda.Constants;
+import sh.leroy.axel.commechezsoi.awslambda.handler.AbstractStringHandler;
 import sh.leroy.axel.commechezsoi.awslambda.model.Annonce;
 import sh.leroy.axel.commechezsoi.awslambda.model.ApiGatewayResponse;
-import sh.leroy.axel.commechezsoi.awslambda.model.Criteres;
 
-public class LeboncoinViewHandler extends AbstractHandler {
+public class LeboncoinViewHandler extends AbstractStringHandler {
     private static final Logger logger = LogManager.getLogger(LeboncoinViewHandler.class);
 
     @Override
@@ -37,7 +38,7 @@ public class LeboncoinViewHandler extends AbstractHandler {
     }
 
     @Override
-    protected ApiGatewayResponse getAnnonce(String id) {
+    public ApiGatewayResponse handleString(String id) {
         ObjectMapper mapper = new ObjectMapper();
 
         URI adUri;
@@ -52,8 +53,8 @@ public class LeboncoinViewHandler extends AbstractHandler {
         HttpClient client = HttpClientBuilder.create().build();
 
         HttpPost post = new HttpPost(adUri);
-        post.setHeader("Content-Type", ContentType.APPLICATION_FORM_URLENCODED.toString());
-        post.setEntity(new StringEntity(Constants.LEBONCOIN_TOKEN, "UTF-8"));
+        post.setHeader("Content-Type", ContentType.APPLICATION_FORM_URLENCODED.getMimeType());
+        post.setEntity(new StringEntity(Constants.LEBONCOIN_TOKEN, Consts.UTF_8));
 
         HttpResponse response;
         try {
@@ -64,7 +65,7 @@ public class LeboncoinViewHandler extends AbstractHandler {
 
         JsonNode result;
         try {
-            result = mapper.readTree(IOUtils.toString(response.getEntity().getContent(),"UTF-8"));
+            result = mapper.readTree(IOUtils.toString(response.getEntity().getContent(), Consts.UTF_8));
         } catch (Exception e) {
             return error(500, "Error while parsing the response", e, logger);
         }
@@ -111,16 +112,11 @@ public class LeboncoinViewHandler extends AbstractHandler {
                 builder.setTelephone(result.get("phone").asText());
 
             return ApiGatewayResponse.builder()
-                    .setContentType(ContentType.APPLICATION_JSON.toString())
+                    .setContentType(ContentType.APPLICATION_JSON.getMimeType())
                     .setObjectBody(builder.build())
                     .build();
         } catch (ParseException e) {
             return error(500, "Error while parsing date", e, logger);
         }
-    }
-
-    @Override
-    protected ApiGatewayResponse getAnnonces(Criteres criteres) {
-        return null;
     }
 }

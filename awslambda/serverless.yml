@@ -8,14 +8,14 @@ package:
   artifact: target/awslambda-1.0-SNAPSHOT.jar
 functions:
   leboncoinlist:
-    handler: sh.leroy.axel.commechezsoi.awslambda.handler.LeboncoinListHandler
+    handler: sh.leroy.axel.commechezsoi.awslambda.handler.leboncoin.LeboncoinListHandler
     events:
         - http:
             path: leboncoinlist
             method: post
             cors: true
   leboncoinview:
-      handler: sh.leroy.axel.commechezsoi.awslambda.handler.LeboncoinViewHandler
+      handler: sh.leroy.axel.commechezsoi.awslambda.handler.leboncoin.LeboncoinViewHandler
       events:
           - http:
               path: leboncoinview
