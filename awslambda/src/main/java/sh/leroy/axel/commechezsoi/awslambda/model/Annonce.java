@@ -1,8 +1,8 @@
 package sh.leroy.axel.commechezsoi.awslambda.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Annonce {
     public enum Site { Leboncoin, LogicImmo, SeLoger, PaP }

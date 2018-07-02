@@ -11,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import sh.leroy.axel.commechezsoi.awslambda.Constants;
 
 public class ApiGatewayResponse {

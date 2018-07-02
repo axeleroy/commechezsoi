@@ -1,9 +1,14 @@
-package sh.leroy.axel.commechezsoi.awslambda.handler;
+package sh.leroy.axel.commechezsoi.awslambda.handler.leboncoin;
 
-import com.amazonaws.services.lambda.runtime.Context;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.commons.io.IOUtils;
+import org.apache.http.Consts;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -14,19 +19,17 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.amazonaws.services.lambda.runtime.Context;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import sh.leroy.axel.commechezsoi.awslambda.Constants;
+import sh.leroy.axel.commechezsoi.awslambda.handler.AbstractCriteresHandler;
 import sh.leroy.axel.commechezsoi.awslambda.model.ApiGatewayResponse;
 import sh.leroy.axel.commechezsoi.awslambda.model.Criteres;
 import sh.leroy.axel.commechezsoi.awslambda.model.Criteres.AnnonceType;
 
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-public class LeboncoinListHandler extends AbstractHandler {
+public class LeboncoinListHandler extends AbstractCriteresHandler {
     private static final Logger logger = LogManager.getLogger(LeboncoinListHandler.class);
 
     @Override
@@ -35,7 +38,7 @@ public class LeboncoinListHandler extends AbstractHandler {
     }
 
     @Override
-    protected ApiGatewayResponse getAnnonces(Criteres criteres) {
+    public ApiGatewayResponse getAnnonces(Criteres criteres) {
         ObjectMapper mapper = new ObjectMapper();
 
         URI uri;
@@ -56,8 +59,8 @@ public class LeboncoinListHandler extends AbstractHandler {
 
         HttpClient client = HttpClientBuilder.create().build();
         HttpPost post = new HttpPost(uri);
-        post.setHeader("Content-Type", ContentType.APPLICATION_FORM_URLENCODED.toString());
-        post.setEntity(new StringEntity(Constants.LEBONCOIN_TOKEN, "UTF-8"));
+        post.setHeader("Content-Type", ContentType.APPLICATION_FORM_URLENCODED.getMimeType());
+        post.setEntity(new StringEntity(Constants.LEBONCOIN_TOKEN, Consts.UTF_8));
 
         HttpResponse response;
         try {
@@ -68,7 +71,7 @@ public class LeboncoinListHandler extends AbstractHandler {
 
         JsonNode results;
         try {
-            results = mapper.readTree(IOUtils.toString(response.getEntity().getContent(),"UTF-8"));
+            results = mapper.readTree(IOUtils.toString(response.getEntity().getContent(), Consts.UTF_8));
         } catch (Exception e) {
             return error(500, "Error while parsing the response", e, logger);
         }
@@ -80,14 +83,9 @@ public class LeboncoinListHandler extends AbstractHandler {
         }
 
         return ApiGatewayResponse.builder()
-                .setContentType(ContentType.APPLICATION_JSON.toString())
+                .setContentType(ContentType.APPLICATION_JSON.getMimeType())
                 .setObjectBody(ads.toArray())
                 .build();
-    }
-
-    @Override
-    protected ApiGatewayResponse getAnnonce(String id) {
-        return null;
     }
 
     private String getSurface(int surface) {
