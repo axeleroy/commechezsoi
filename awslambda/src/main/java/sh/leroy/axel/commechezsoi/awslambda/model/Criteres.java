@@ -2,17 +2,10 @@ package sh.leroy.axel.commechezsoi.awslambda.model;
 
 import java.util.Arrays;
 
+import sh.leroy.axel.commechezsoi.awslambda.model.enums.AnnonceType;
+import sh.leroy.axel.commechezsoi.awslambda.model.enums.AnnonceurType;
+
 public class Criteres {
-    public enum AnnonceType {
-        Location(0), Vente(1);
-        private int type;
-        private AnnonceType(int type) {
-            this.type = type;
-        }
-        public int getType() {
-            return this.type;
-        }
-    }
 
     public City[] cities;
     public int minPrice;
@@ -24,6 +17,7 @@ public class Criteres {
     public int minBedrooms;
     public int maxBedrooms;
     public AnnonceType type;
+    public AnnonceurType annonceur;
 
     public Criteres() {
         super();
@@ -31,8 +25,7 @@ public class Criteres {
 
     public Criteres(City[] cities, int minPrice, int maxPrice,
                       int minSurface, int maxSurface, int minRooms, int maxRooms,
-                      int minBedrooms, int maxBedrooms, AnnonceType type,
-                      boolean leboncoin, boolean logicimmo, boolean pap, boolean seloger) {
+                      int minBedrooms, int maxBedrooms, AnnonceType type, AnnonceurType annonceur) {
         this.cities = cities;
         this.minPrice = minPrice;
         this.maxPrice = maxPrice;
@@ -43,6 +36,7 @@ public class Criteres {
         this.minBedrooms = minBedrooms;
         this.maxBedrooms = maxBedrooms;
         this.type = type;
+        this.annonceur = annonceur;
     }
 
     // region utils

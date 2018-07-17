@@ -26,6 +26,9 @@
     <i class="fa fa-calendar font-weight-light" aria-hidden="true"></i> <span class="font-weight-light">{{annonce.created | date:'mediumDate':'':'fr'}}</span>
   </div>
   <div class="col">
+    <i class="fa fa-user-circle font-weight-light" aria-hidden="true"></i> <span class="font-weight-light">{{annonce.annonceur.toString()}}</span>
+  </div>
+  <div class="col">
     <i class="fa fa-globe font-weight-light" aria-hidden="true"></i> <span class="font-weight-light">{{annonce.site}}</span>
   </div>
 </div>

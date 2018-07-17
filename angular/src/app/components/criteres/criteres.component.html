@@ -6,11 +6,19 @@
 
     <div class="col-sm">
       <h5>Type d'annonce</h5>
-      <div *ngFor="let choice of annonceTypes" class="form-check">
+      <div *ngFor="let choice of AnnonceType | keys" class="form-check">
         <label class="form-check-label">
           <input [(ngModel)]="criteresService.criteres.type" [value]="choice" [checked]="criteresService.criteres.type == choice"
-                 (ngModelChange)="criteresService.criteresChanged()" class="form-check-input" type="radio" name="typeAnnonce" id="location">
-          {{AnnonceType[choice]}}
+                 (ngModelChange)="criteresService.criteresChanged()" class="form-check-input" type="radio" name="typeAnnonce">
+          {{choice}}
+        </label>
+      </div>
+      <h5>Type d'annonceur</h5>
+      <div *ngFor="let choice of AnnonceurType | keys" class="form-check">
+        <label class="form-check-label">
+          <input [(ngModel)]="criteresService.criteres.annonceur" [value]="choice" [checked]="criteresService.criteres.annonceur == choice"
+                (ngModelChange)="criteresService.criteresChanged()" class="form-check-input" type="radio" name="typeAnnonceur">
+          {{AnnonceurType[choice].toString()}}
         </label>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import {ApplicationRef, EventEmitter, Injectable} from '@angular/core';
-import {Annonce, Site} from '../../model/annonce/annonce';
+import {Annonce} from '../../model/annonce/annonce';
 import {PersistenceService, StorageType} from 'angular-persistence';
 import {AnnonceDatabase} from "../../model/annonce/annoncedb";
 import {Observable} from "rxjs/Observable";

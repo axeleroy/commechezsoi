@@ -20,7 +20,8 @@ import sh.leroy.axel.commechezsoi.awslambda.Constants;
 import sh.leroy.axel.commechezsoi.awslambda.handler.AbstractCriteresHandler;
 import sh.leroy.axel.commechezsoi.awslambda.model.ApiGatewayResponse;
 import sh.leroy.axel.commechezsoi.awslambda.model.Criteres;
-import sh.leroy.axel.commechezsoi.awslambda.model.Criteres.AnnonceType;
+import sh.leroy.axel.commechezsoi.awslambda.model.enums.AnnonceType;
+import sh.leroy.axel.commechezsoi.awslambda.model.enums.AnnonceurType;
 
 import java.io.IOException;
 import java.net.URI;
@@ -43,7 +44,7 @@ public class LeboncoinListHandler extends AbstractCriteresHandler {
 
         URI uri;
         try {
-             URIBuilder builder = new URIBuilder(Constants.LEBONCOIN_LIST)
+            URIBuilder builder = new URIBuilder(Constants.LEBONCOIN_LIST)
                 .addParameter("c", (criteres.type == AnnonceType.Location) ? "10" : "9")
                 .addParameter("mrs", String.valueOf(criteres.minPrice))
                 .addParameter("mre", String.valueOf(criteres.maxPrice))
@@ -52,7 +53,11 @@ public class LeboncoinListHandler extends AbstractCriteresHandler {
                 .addParameter("ros", String.valueOf(criteres.minRooms))
                 .addParameter("roe", String.valueOf(criteres.maxRooms))
                 .addParameter("zipcode", String.join(",", criteres.getZipcodes()));
-             uri = builder.build();
+            if (criteres.annonceur == AnnonceurType.Agence)
+                builder = builder.addParameter("f", "c");
+            if (criteres.annonceur == AnnonceurType.Particulier)
+                builder = builder.addParameter("f", "p");
+            uri = builder.build();
         } catch (URISyntaxException e) {
             return error(500, "Error building URI", e, logger);
         }
