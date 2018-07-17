@@ -1,4 +1,6 @@
 import {City} from './city';
+import {AnnonceurType} from "../enums/annonceur";
+import {AnnonceType} from "../enums/annoncetype";
 
 export class Criteres {
   cities: City[];
@@ -11,6 +13,7 @@ export class Criteres {
   minBedrooms: number;
   maxBedrooms: number;
   type: AnnonceType;
+  annonceur: AnnonceurType;
 
   constructor(obj?) {
     if (obj) {
@@ -26,24 +29,9 @@ export class Criteres {
       this.minBedrooms = 0;
       this.maxBedrooms = 0;
       this.type = AnnonceType.Location;
+      this.annonceur = AnnonceurType.Both;
     }
   };
-
-  public setFrom(o: Criteres) {
-    this.cities = o.cities;
-    this.minPrice = o.minPrice;
-    this.maxPrice = o.maxPrice;
-    this.minSurface = o.minSurface;
-    this.maxSurface = o.maxSurface;
-    this.minRooms = o.minRooms;
-    this.maxRooms = o.maxRooms;
-    this.minBedrooms = o.minBedrooms;
-    this.maxBedrooms = o.maxBedrooms;
-    this.type = o.type;
-  }
 }
 
-export enum AnnonceType {
-  Location,
-  Vente
-}
+

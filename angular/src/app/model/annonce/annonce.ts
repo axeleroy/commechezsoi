@@ -1,3 +1,7 @@
+import {AnnonceurType} from "../enums/annonceur";
+import {AnnonceType} from "../enums/annoncetype";
+import {Site} from "../enums/site";
+
 export interface Annonce {
   id: string;
   site: Site;
@@ -13,11 +17,8 @@ export interface Annonce {
   bedrooms?: number;
   link: string;
   pictures?: string[];
+  type: AnnonceType;
+  annonceur: AnnonceurType;
 }
 
-export enum Site {
-  Leboncoin = "Leboncoin",
-  LogicImmo = "Logicimmo",
-  SeLoger = "SeLoger",
-  PaP = "PAP"
-}
+

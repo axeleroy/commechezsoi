@@ -1,7 +1,8 @@
 import {Component, NgModule, OnInit} from '@angular/core';
 import {CriteresService} from '../../services/criteres/criteres.service';
-import {AnnonceType} from '../../model/criteres/criteres';
+import {AnnonceType} from '../../model/enums/annoncetype';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {AnnonceurType} from "../../model/enums/annonceur";
 
 @Component({
   selector: 'app-criteres',
@@ -13,7 +14,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 })
 export class CriteresComponent implements OnInit {
   AnnonceType = AnnonceType;
-  annonceTypes = (<any>Object).values(AnnonceType).filter( e => typeof( e ) == 'number' );
+  AnnonceurType = AnnonceurType;
 
   constructor(public criteresService: CriteresService) {
   }

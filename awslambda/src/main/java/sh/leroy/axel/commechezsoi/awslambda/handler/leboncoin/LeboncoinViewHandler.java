@@ -21,6 +21,9 @@ import sh.leroy.axel.commechezsoi.awslambda.Constants;
 import sh.leroy.axel.commechezsoi.awslambda.handler.AbstractStringHandler;
 import sh.leroy.axel.commechezsoi.awslambda.model.Annonce;
 import sh.leroy.axel.commechezsoi.awslambda.model.ApiGatewayResponse;
+import sh.leroy.axel.commechezsoi.awslambda.model.enums.AnnonceType;
+import sh.leroy.axel.commechezsoi.awslambda.model.enums.AnnonceurType;
+import sh.leroy.axel.commechezsoi.awslambda.model.enums.Site;
 
 import java.io.IOException;
 import java.net.URI;
@@ -99,7 +102,7 @@ public class LeboncoinViewHandler extends AbstractStringHandler {
             Annonce.Builder builder = Annonce.builder();
             builder
                 .setId("leboncoin-" + result.get("list_id").asText())
-                .setSite(Annonce.Site.Leboncoin)
+                .setSite(Site.Leboncoin)
                 .setCreated(new SimpleDateFormat("dd/MM/yyyy '&agrave;' H'h'mm")
                         .parse(result.get("formatted_date").asText()))
                 .setTitle(Jsoup.parse(result.get("subject").asText()).text())
@@ -108,6 +111,8 @@ public class LeboncoinViewHandler extends AbstractStringHandler {
                 .setSurface(surface)
                 .setRooms(rooms)
                 .setCity(city)
+                .setAnnonceur((result.get("company_ad").asText().equals("0")) ? AnnonceurType.Particulier : AnnonceurType.Agence)
+                .setType((result.get("category_id").asText().equals("10")) ? AnnonceType.Location : AnnonceType.Vente)
                 .setPictures(mapper.convertValue(result.get("images"), String[].class))
                 .setLink("https://www.leboncoin.fr/vi/" + result.get("list_id").asText() + ".htm");
 

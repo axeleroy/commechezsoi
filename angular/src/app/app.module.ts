@@ -21,6 +21,7 @@ import {OrderAnnonceByDatePipe} from './pipes/order-by-date.pipe';
 import {AnnonceDatabase} from "./model/annonce/annoncedb";
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { AnnonceInfoComponent } from './components/annonce-info/annonce-info.component';
+import { KeysPipe } from './pipes/keys.pipe';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -37,6 +38,7 @@ registerLocaleData(localeFr, 'fr');
     OrderAnnonceByDatePipe,
     SafeHtmlPipe,
     AnnonceInfoComponent,
+    KeysPipe,
   ],
   imports: [
     BrowserModule,

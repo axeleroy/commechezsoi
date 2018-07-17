@@ -4,8 +4,11 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import sh.leroy.axel.commechezsoi.awslambda.model.enums.AnnonceType;
+import sh.leroy.axel.commechezsoi.awslambda.model.enums.AnnonceurType;
+import sh.leroy.axel.commechezsoi.awslambda.model.enums.Site;
+
 public class Annonce {
-    public enum Site { Leboncoin, LogicImmo, SeLoger, PaP }
 
     public String id;
     public Site site;
@@ -22,14 +25,17 @@ public class Annonce {
     public int bedrooms;
     public String link;
     public String[] pictures;
+    public AnnonceurType annonceur;
+    public AnnonceType type;
 
     public Annonce() {
         super();
     }
 
     public Annonce(String id, Site site, Date created, String title, String city,
-                   double price, double surface, String description, String telephone,
-                   double charges, int rooms, int bedrooms, String link, String[] pictures) {
+            double price, double surface, String description, String telephone,
+            double charges, int rooms, int bedrooms, String link, String[] pictures,
+            AnnonceurType annonceur, AnnonceType type) {
         this.id = id;
         this.site = site;
         this.created = created;
@@ -44,6 +50,8 @@ public class Annonce {
         this.bedrooms = bedrooms;
         this.link = link;
         this.pictures = pictures;
+        this.type = type;
+        this.annonceur = annonceur;
     }
 
     public static Builder builder() {
@@ -65,6 +73,8 @@ public class Annonce {
         private int bedrooms;
         private String link;
         private String[] pictures;
+        private AnnonceurType annonceur;
+        private AnnonceType type;
 
         public Builder setId(String id) {
             this.id = id;
@@ -136,8 +146,20 @@ public class Annonce {
             return this;
         }
 
+        public Builder setAnnonceur(AnnonceurType annonceur) {
+            this.annonceur = annonceur;
+            return this;
+        }
+
+        public Builder setType(AnnonceType type) {
+            this.type = type;
+            return this;
+        }
+
         public Annonce build() {
-            return new Annonce(id, site, created, title, city, price, surface, description, telephone, charges, rooms, bedrooms, link, pictures);
+            return new Annonce(id, site, created, title, city, price,
+                    surface, description, telephone, charges, rooms,
+                    bedrooms, link, pictures, annonceur, type);
         }
     }
 
