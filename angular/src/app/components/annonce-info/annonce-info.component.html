@@ -16,7 +16,7 @@
   <div *ngIf="isDetail && annonce.charges" class="col">
     <i class="fa fa-money font-weight-light" aria-hidden="true"></i> {{annonce.charges}}€  <span class="font-weight-light">Charges</span>
   </div>
-  <div *ngIf="isDetail" class="col">
+  <div *ngIf="isDetail && annonce.telephone" class="col">
     <i class="fa fa-phone font-weight-light" aria-hidden="true"></i> {{annonce.telephone}}
   </div>
 </div>
