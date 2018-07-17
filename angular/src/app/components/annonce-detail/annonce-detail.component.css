@@ -1,3 +1,9 @@
 ngb-carousel {
   margin-bottom: 1rem;
+  background-color: #e3e3e3;
+}
+
+.w-100 {
+  max-height: 300px;
+  object-fit: contain;
 }

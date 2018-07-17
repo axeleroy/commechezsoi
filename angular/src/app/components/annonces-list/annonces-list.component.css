@@ -32,3 +32,9 @@ a {
 .card:hover .card-img-overlay {
   opacity: 1;
 }
+
+.card-img-top {
+  object-fit: contain;
+  max-height: 300px;
+  background-color: #e3e3e3;
+}
