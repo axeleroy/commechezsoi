@@ -3,7 +3,7 @@
     <div *ngFor="let annonce of annonces" class="col-sm-4 py-2">
       <div class="card" (click)="open(annonce)">
         <div *ngIf="annonce.pictures">
-          <img class="card-img-top img-fluid" src="{{annonce.pictures[0]}}">
+          <img class="card-img-top" [src]="annonce.pictures[0]">
         </div>
         <div class="card-img-overlay">
           <button type="button" class="close pull-right" aria-label="Close" (click)="delete($event, annonce)">
