@@ -1,10 +1,10 @@
-import {ApplicationRef, EventEmitter, Injectable} from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 import {Annonce} from '../../model/annonce/annonce';
 import {PersistenceService, StorageType} from 'angular-persistence';
 import {AnnonceDatabase} from "../../model/annonce/annoncedb";
-import {Observable} from "rxjs/Observable";
 import 'dexie-observable';
 import 'rxjs/add/observable/fromPromise';
+import {from} from "rxjs";
 
 @Injectable()
 export class AnnoncesService {
@@ -24,7 +24,7 @@ export class AnnoncesService {
   }
 
   getAll() {
-    return Observable.fromPromise(this.db.annonces.orderBy('created').reverse().toArray());
+    return from(this.db.annonces.orderBy('created').reverse().toArray());
   }
 
   get(id: string) {
