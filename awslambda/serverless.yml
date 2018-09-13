@@ -3,7 +3,7 @@ provider:
   name: aws
   runtime: java8
   memorySize: 1024
-  timeout: 240
+  timeout: 30
 package:
   artifact: target/awslambda-1.0-SNAPSHOT.jar
 functions:
