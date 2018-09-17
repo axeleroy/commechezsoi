@@ -23,7 +23,7 @@ export class FetchService {
 
     }
     if (this.parametersService.seloger) {
-
+      this.fetchSeLoger();
     }
   }
 
@@ -39,6 +39,18 @@ export class FetchService {
                   annonce.telephone = phone;
                   this.annoncesService.add(annonce);
                 })
+            });
+        }
+      });
+  }
+
+  fetchSeLoger(): void {
+    this.client.post<string[]>(environment.aws_lambda_endpoint + 'selogersearch', this.parametersService.criteres)
+      .subscribe(ids => {
+        for (const id of ids) {
+          this.client.post<Annonce>(environment.aws_lambda_endpoint + 'selogerdetail', id)
+            .subscribe(annonce => {
+              this.annoncesService.add(annonce);
             });
         }
       });
