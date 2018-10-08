@@ -5,6 +5,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.entity.ContentType;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -68,42 +69,44 @@ public class SeLogerDetailHandler extends AbstractStringHandler {
             DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document xml = docBuilder.parse(response.getEntity().getContent());
             XPath xPath = XPathFactory.newInstance().newXPath();
-            NodeList nodeList = (NodeList) xPath.compile("/detailAnnponce").evaluate(xml, XPathConstants.NODESET);
 
-            Element el = (Element) nodeList;
-
+            NodeList photosNodeList = (NodeList) xPath.compile("//photos/photo/bigUrl").evaluate(xml, XPathConstants.NODESET);
             List<String> photos = new ArrayList<>();
-            NodeList photosNode = el.getElementsByTagName("photos");
-            for (int i = 0 ; i < photosNode.getLength() ; i++) {
-                Element node = (Element) photosNode.item(i);
-                photos.add(node.getElementsByTagName("bigUrl").item(0).getTextContent());
+            for (int i = 0 ; i < photosNodeList.getLength() ; i++) {
+                Element node = (Element) photosNodeList.item(i);
+                photos.add(node.getTextContent());
             }
 
-            // NodeList contact = el.getElementsByTagName("contact");
-             //= xPath.compile("telephone").evaluate(contact, XPathConstants.NODESET);
+            NodeList annonceNodes = (NodeList) xPath.compile("/detailAnnonce").evaluate(xml, XPathConstants.NODESET);
+            Element el = (Element) annonceNodes.item(0);
+            NodeList contactNodes = (NodeList) xPath.compile("/detailAnnonce/contact").evaluate(xml, XPathConstants.NODESET);
+            Element contact = (Element) contactNodes.item(0);
 
             Annonce.Builder builder = Annonce.builder();
             builder
-                .setId("seloger-" + id)
+                .setId("seloger-" + 0)
                 .setSite(Site.SeLoger)
-                .setCreated(new SimpleDateFormat("%Y-%m-%dT%H:%M:%S")
+                .setCreated(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
                     .parse(el.getElementsByTagName("dtFraicheur").item(0).getTextContent()))
                 .setTitle(el.getElementsByTagName("titre").item(0).getTextContent())
                 .setCity(el.getElementsByTagName("ville").item(0).getTextContent())
-                // .setTelephone()
+                .setTelephone(contact.getElementsByTagName("telephone").item(0).getTextContent())
                 .setPrice(Integer.parseInt(el.getElementsByTagName("prix").item(0).getTextContent()))
                 .setCharges(Integer.parseInt(el.getElementsByTagName("charges").item(0).getTextContent()))
                 .setSurface(Integer.parseInt(el.getElementsByTagName("surface").item(0).getTextContent()))
                 .setRooms(Integer.parseInt(el.getElementsByTagName("nbPieces").item(0).getTextContent()))
                 .setBedrooms(Integer.parseInt(el.getElementsByTagName("nbChambres").item(0).getTextContent()))
-                .setLink(el.getElementsByTagName("permalink").item(0).getTextContent())
+                .setLink(el.getElementsByTagName("permaLien").item(0).getTextContent())
                 .setDescription(el.getElementsByTagName("descriptif").item(0).getTextContent())
                 .setPictures(photos.toArray(new String[0]));
+
+            return ApiGatewayResponse.builder()
+                .setContentType(ContentType.APPLICATION_JSON.getMimeType())
+                .setObjectBody(builder.build())
+                .build();
 
         } catch (ParserConfigurationException | IOException | XPathExpressionException | SAXException | ParseException e) {
             return error(500, "Error while parsing the response", e, logger);
         }
-
-        return null;
     }
 }

@@ -1,5 +1,7 @@
 package sh.leroy.axel.commechezsoi.awslambda;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -19,6 +21,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import sh.leroy.axel.commechezsoi.awslambda.model.Annonce;
+import sh.leroy.axel.commechezsoi.awslambda.model.enums.Site;
 
 public class MainTest {
     public static void main(String[] args) {
@@ -27,26 +31,41 @@ public class MainTest {
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document xml = builder.parse(new FileInputStream("/home/axel/Téléchargements/rep.xml"));
             XPath xPath = XPathFactory.newInstance().newXPath();
-            NodeList nodeList = (NodeList) xPath.compile("/detailAnnponce").evaluate(xml, XPathConstants.NODESET);
 
-            System.out.println(nodeList.getLength());
-
-            Element el = (Element) nodeList;
-
+            NodeList photosNodeList = (NodeList) xPath.compile("//photos/photo/bigUrl").evaluate(xml, XPathConstants.NODESET);
             List<String> photos = new ArrayList<>();
-            NodeList photosNode = el.getElementsByTagName("photos");
-            for (int i = 0 ; i < photosNode.getLength() ; i++) {
-                Element node = (Element) photosNode.item(i);
-                photos.add(node.getElementsByTagName("bigUrl").item(0).getTextContent());
+            for (int i = 0 ; i < photosNodeList.getLength() ; i++) {
+                Element node = (Element) photosNodeList.item(i);
+                photos.add(node.getTextContent());
             }
 
-            /* Element contact = (Element) el.getElementsByTagName("contact");
-            String phone = contact.getElementsByTagName("telephone").item(0).getTextContent();
-            */
+            NodeList annonceNodes = (NodeList) xPath.compile("/detailAnnonce").evaluate(xml, XPathConstants.NODESET);
+            Element el = (Element) annonceNodes.item(0);
+            NodeList contactNodes = (NodeList) xPath.compile("/detailAnnonce/contact").evaluate(xml, XPathConstants.NODESET);
+            Element contact = (Element) contactNodes.item(0);
 
-            System.out.println(photos);
-            // System.out.println(phone);
-        } catch (IOException | ClassCastException | SAXException | XPathExpressionException | ParserConfigurationException e) {
+            Annonce.Builder annonceBuilder = Annonce.builder();
+            annonceBuilder
+                .setId("seloger-" + 0)
+                .setSite(Site.SeLoger)
+                .setCreated(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+                    .parse(el.getElementsByTagName("dtFraicheur").item(0).getTextContent()))
+                .setTitle(el.getElementsByTagName("titre").item(0).getTextContent())
+                .setCity(el.getElementsByTagName("ville").item(0).getTextContent())
+                .setTelephone(contact.getElementsByTagName("telephone").item(0).getTextContent())
+                .setPrice(Integer.parseInt(el.getElementsByTagName("prix").item(0).getTextContent()))
+                .setCharges(Integer.parseInt(el.getElementsByTagName("charges").item(0).getTextContent()))
+                .setSurface(Integer.parseInt(el.getElementsByTagName("surface").item(0).getTextContent()))
+                .setRooms(Integer.parseInt(el.getElementsByTagName("nbPieces").item(0).getTextContent()))
+                .setBedrooms(Integer.parseInt(el.getElementsByTagName("nbChambres").item(0).getTextContent()))
+                .setLink(el.getElementsByTagName("permaLien").item(0).getTextContent())
+                .setDescription(el.getElementsByTagName("descriptif").item(0).getTextContent())
+                .setPictures(photos.toArray(new String[0]));
+
+            Annonce annonce = annonceBuilder.build();
+            System.out.println(annonce.telephone);
+
+        } catch (IOException | ClassCastException | SAXException | XPathExpressionException | ParserConfigurationException | ParseException e) {
             e.printStackTrace();
         }
 

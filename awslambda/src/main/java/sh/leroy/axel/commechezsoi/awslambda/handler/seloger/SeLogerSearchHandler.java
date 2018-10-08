@@ -62,6 +62,7 @@ public class SeLogerSearchHandler extends AbstractCriteresHandler {
                 .addParameter("getDtCreationMax", "1");
 
             uri = builder.build();
+            logger.info(uri.toString());
         } catch (URISyntaxException e) {
             return error(500, "Error building URL", e, logger);
         }
