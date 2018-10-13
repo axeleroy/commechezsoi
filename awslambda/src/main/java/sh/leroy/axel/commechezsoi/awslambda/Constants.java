@@ -10,6 +10,9 @@ public class Constants {
     public static final String LEBONCOIN_LIST = "https://mobile.leboncoin.fr/templates/api/list.json";
     public static final String LEBONCOIN_VIEW = "https://mobile.leboncoin.fr/templates/api/view.json";
     public static final String LEBONCOIN_PHONE = "https://api.leboncoin.fr/api/utils/phonenumber.json";
-    public static final String SELOGER_SEARCH = "http://ws.seloger.com/search_4.0.xml";
-    public static final String SELOGER_DETAIL = "http://ws.seloger.com/annonceDetail_4.0.xml";
+    public static final String SELOGER_TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJTZUxvZ2VyLW1vYmlsZSIsImFwcCI6IjYzZWU3MTRkLWE2MmEtNGEyNy05ZmJlLTQwYjdhMmMzMThlNCIsImlhdCI6MTUzOTQ0MjMyMCwianRpIjoiNWYzODRhNDYtZjk5MS00ODZkLWFkN2YtMmE2M2YxZTdkM2UwIiwiYXVkIjoiU2VMb2dlci1Nb2JpbGUtNi4wIn0.Qib13Y4395f_bi5Df0IhMQRvIxQZEfpf8Ac66oTfyiA";
+    public static final String SELOGER_GUID = "63ee714d-a62a-4a27-9fbe-40b7a2c318e4";
+    public static final String SELOGER_AUTHENTICATE = "https://api-seloger.svc.groupe-seloger.com/api/v1/security/authenticate";
+    public static final String SELOGER_SEARCH = "https://api-seloger.svc.groupe-seloger.com/api/v1/listings/search";
+    public static final String SELOGER_DETAIL = "https://api-seloger.svc.groupe-seloger.com/api/v1/listings/";
 }

@@ -28,12 +28,23 @@ functions:
                 path: leboncoinphone
                 method: post
                 cors: true
+  selogerauthenticate:
+    handler: sh.leroy.axel.commechezsoi.awslambda.handler.seloger.SeLogerAuthenticateHandler
+    events:
+    - http:
+        path: selogerauthenticate
+        method: get
+        cors: true
   selogersearch:
     handler: sh.leroy.axel.commechezsoi.awslambda.handler.seloger.SeLogerSearchHandler
     events:
     - http:
         path: selogersearch
         method: post
+        request:
+          parameters:
+            queryparams:
+              token: true
         cors: true
   selogerdetail:
     handler: sh.leroy.axel.commechezsoi.awslambda.handler.seloger.SeLogerDetailHandler
@@ -41,4 +52,8 @@ functions:
     - http:
         path: selogerdetail
         method: post
+        request:
+          parameters:
+            queryparams:
+              token: true
         cors: true
