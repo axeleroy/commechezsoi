@@ -8,7 +8,7 @@ afin de m'aider dans ma recherche d'appartement et après avoir trouvé grâce �
 l'appartement de mes rêves en moins d'une semaine, plusieurs de mes amis furent intéressés pour l'utiliser.
 
 Cependant, l'installation et l'utilisation de celui-ci étaient peu triviales pour ceux qui
-avaient peu expérience technique.
+avaient peu d'expérience technique.
 
 Fin 2017, j'ai donc entrepris de réécrire complétement cette application afin de la rendre accessible à tous
 à partir d'un simple navigateur web.
@@ -60,7 +60,7 @@ corresponde au à l'URL notée plus haut (ex : `https://xxxxxxx.execute-api.eu-w
 5. Copier le contenu de `dist` sur votre serveur ou un repo [GitHub Pages](https://pages.github.com/).
  
 ## To-Do List
-* Support de Bien'ici, LogicImmo, PAP et SeLoger
+* Support de Bien'ici, LogicImmo et PAP
 * Critères avancés (type de logement, commodités, etc.)
 * Tri des annonces 
   * Par site
@@ -77,8 +77,5 @@ goodies (typeahead + datepicker)
 * [angular-persistence](https://github.com/darkarena1/angular-persistence) : service de stockage 
 via `LocalStorage`
 * [Dexie.js](https://github.com/dfahlander/Dexie.js/) : wrapper pour `IndexedDB`
-* [codes-postaux](https://github.com/etalab/codes-postaux) : librairie permettant de faire
-correspondre codes postaux et codes INSEE
-* [VICOPO](https://vicopo.selfbuild.fr/) : API HTTP utilisée pour l'autocomplétion des villes
 * [Font Awesome](https://fontawesome.com/v4.7.0/)
 * [Serverless](https://serverless.com/) : framework de déploiement et gestion des Lambdas AWS

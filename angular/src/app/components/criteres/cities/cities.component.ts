@@ -12,9 +12,8 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/merge';
-import codesPostaux = require('codes-postaux');
 
-const SEARCH_URL = "https://vicopo.selfbuild.fr/cherche/";
+const SEARCH_URL = "https://res.bienici.com/suggest.json?q=";
 
 @Injectable()
 export class CitySearchService {
@@ -26,8 +25,7 @@ export class CitySearchService {
     }
 
     return this.http
-      .get(SEARCH_URL + term)
-      .map( result => result['cities']);
+      .get<any[]>(SEARCH_URL + term);
   }
 }
 
@@ -62,18 +60,17 @@ export class CitiesComponent implements OnInit {
   selectItem($event: any, input) {
     $event.preventDefault();
     const item = $event.item;
-    let insee = codesPostaux.find(item.code)[0].codeCommune;
-    insee = insee.slice(0, 2) + "0" + insee.slice(2); // Ajout d'un 0 supplémentaire pour SeLoger
-    this.addCity(item.city, item.code, insee);
+    this.addCity(item.name, item.postalCodes[0], item.insee_code, item.zoneIds[0]);
     this._renderer.setProperty(input, 'value', '');
   }
 
-  addCity(name: string, postcode: number, insee: number): void {
+  addCity(name: string, postcode: number, insee: number, zoneId: string): void {
     if (name && postcode && insee) {
       const city = new City();
-      city.name = name.toLowerCase();
+      city.name = name;
       city.postcode = postcode;
       city.insee = insee;
+      city.zoneId = zoneId;
 
       this.criteres.cities.push(city);
       this.update();

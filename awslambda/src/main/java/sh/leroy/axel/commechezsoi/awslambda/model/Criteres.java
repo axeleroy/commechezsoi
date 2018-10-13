@@ -51,6 +51,10 @@ public class Criteres {
     public String[] getInsees() {
         return Arrays.stream(cities).map(city -> city.insee).toArray(String[]::new);
     }
+
+    public String[] getZoneIds() {
+        return Arrays.stream(cities).map(city -> city.zoneId).toArray(String[]::new);
+    }
     // endregion
 
     @Override public String toString() {
