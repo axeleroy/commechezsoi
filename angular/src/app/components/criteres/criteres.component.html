@@ -146,7 +146,7 @@
           <span class="input-group-text">Min</span>
         </div>
         <input [(ngModel)]="criteresService.criteres.minBedrooms" (ngModelChange)="criteresService.criteresChanged()" type="number" class="form-control"
-               aria-label="Nombre minimal de chambres" [attr.disabled]="criteresService.seloger || criteresService.logicimmo || criteresService.pap">
+               aria-label="Nombre minimal de chambres">
       </div>
       <br>
       <div class="input-group">
@@ -154,7 +154,7 @@
           <span class="input-group-text">Min</span>
         </div>
         <input [(ngModel)]="criteresService.criteres.maxBedrooms" (ngModelChange)="criteresService.criteresChanged()" type="number" class="form-control"
-               aria-label="Nombre maximal de chambres" [attr.disabled]="criteresService.seloger || criteresService.logicimmo || criteresService.pap">
+               aria-label="Nombre maximal de chambres">
       </div>
     </div>
   </div>

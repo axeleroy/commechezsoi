@@ -45,15 +45,18 @@ export class FetchService {
   }
 
   fetchSeLoger(): void {
-    this.client.post<string[]>(environment.aws_lambda_endpoint + 'selogersearch', this.parametersService.criteres)
-      .subscribe(ids => {
-        for (const id of ids) {
-          this.client.post<Annonce>(environment.aws_lambda_endpoint + 'selogerdetail', id)
-            .subscribe(annonce => {
-              this.annoncesService.add(annonce);
-            });
-        }
-      });
+    this.client.get<string>(environment.aws_lambda_endpoint + 'selogerauthenticate')
+      .subscribe( token => {
+        this.client.post<string[]>(environment.aws_lambda_endpoint + 'selogersearch?token=' + token, this.parametersService.criteres)
+          .subscribe(ids => {
+            for (const id of ids) {
+              this.client.post<Annonce>(environment.aws_lambda_endpoint + 'selogerdetail?token=' + token, id)
+                .subscribe(annonce => {
+                  this.annoncesService.add(annonce);
+                });
+            }
+          });
+      })
   }
 
 }

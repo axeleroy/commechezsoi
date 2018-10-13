@@ -61,8 +61,9 @@ export class CitiesComponent implements OnInit {
 
   selectItem($event: any, input) {
     $event.preventDefault();
-    let item = $event.item;
+    const item = $event.item;
     let insee = codesPostaux.find(item.code)[0].codeCommune;
+    insee = insee.slice(0, 2) + "0" + insee.slice(2); // Ajout d'un 0 supplémentaire pour SeLoger
     this.addCity(item.city, item.code, insee);
     this._renderer.setProperty(input, 'value', '');
   }
