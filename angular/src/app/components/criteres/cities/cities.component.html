@@ -1,7 +1,7 @@
 <h5>Villes</h5>
 
 <ng-template #rt let-r="result" let-t="term">
-  <span class="text-capitalize font-weight-bold">{{r.city.toLowerCase()}}</span> <span class="font-weight-light">{{r.code}}</span>
+  <span class="text-capitalize font-weight-bold">{{r.name}}</span> &mdash; <span class="font-weight-light">{{r.postalCodes | slice:0:1}}</span>
 </ng-template>
 
 <input #input id="typeahead" type="text" class="form-control" (selectItem)="selectItem($event, input)" [ngbTypeahead]="search"
@@ -9,7 +9,7 @@
 
 <ul class="list-group list-group-flush">
   <li *ngFor="let city of criteres.cities" class="list-group-item">
-    <span class="text-capitalize font-weight-bold">{{city.name}}</span> <span class="font-weight-light">{{city.postcode}}</span>
+    <span class="text-capitalize font-weight-bold">{{city.name}}</span> &mdash; <span class="font-weight-light">{{city.postcode}}</span>
     <button type="button" class="close pull-right" aria-label="Close" (click)="removeCity(city)">
       <span aria-hidden="true">&times;</span>
     </button>
