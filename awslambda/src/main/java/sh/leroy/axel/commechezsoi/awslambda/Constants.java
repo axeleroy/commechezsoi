@@ -5,6 +5,8 @@ public class Constants {
     }
 
     public static final String ORIGIN = "http://localhost:4200";
+    public static final String BIENICI_AUTHENTICATE = "https://account.bienici.com/autoAuthenticate?createGuestAccountOnFailure";
+    public static final String BIENICI_SEARCH = "http://wwww.bienici.com/realEstateAds.json";
     public static final String LEBONCOIN_TOKEN = "d2c84cdd525dddd7cbcc0d0a86609982c2c59e22eb01ee4202245b7b187f49f1546e5f027d48b8d130d9aa918b29e991c029f732f4f8930fc56dbea67c5118ce";
     public static final String LEBONCOIN_APPID = "leboncoin_android";
     public static final String LEBONCOIN_LIST = "https://mobile.leboncoin.fr/templates/api/list.json";

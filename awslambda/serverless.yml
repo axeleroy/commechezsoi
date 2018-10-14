@@ -7,6 +7,23 @@ provider:
 package:
   artifact: target/awslambda-1.0-SNAPSHOT.jar
 functions:
+  bieniciauthenticate:
+    handler: sh.leroy.axel.commechezsoi.awslambda.handler.bienici.BienIciAuthenticateHandler
+    events:
+    - http:
+        path: bieniciauthenticate
+        method: get
+        cors: true
+  bienicisearch:
+    handler: sh.leroy.axel.commechezsoi.awslambda.handler.bienici.BienIciCriteresHandler
+    events:
+    - http:
+        path: bienicisearch
+        method: post
+        request:
+          parameters:
+            queryparams:
+              token: true
   leboncoinlist:
     handler: sh.leroy.axel.commechezsoi.awslambda.handler.leboncoin.LeboncoinListHandler
     events:
