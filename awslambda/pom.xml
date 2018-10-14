@@ -50,8 +50,8 @@
         </dependency>
 
         <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
+            <groupId>org.codehaus.jettison</groupId>
+            <artifactId>jettison</artifactId>
             <version>RELEASE</version>
         </dependency>
 

@@ -4,7 +4,6 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.http.Consts;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -14,8 +13,9 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.json.JSONArray;
-import org.json.JSONObject;
+import org.codehaus.jettison.json.JSONArray;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 import sh.leroy.axel.commechezsoi.awslambda.Constants;
 import sh.leroy.axel.commechezsoi.awslambda.handler.AbstractCriteresHandler;
 import sh.leroy.axel.commechezsoi.awslambda.model.ApiGatewayResponse;
@@ -27,6 +27,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -54,20 +55,25 @@ public class SeLogerSearchHandler extends AbstractCriteresHandler {
             return error(500, "Error building URL", e, logger);
         }
 
-        JSONObject jsonObject = new JSONObject()
-            .put("pageIndex", 1)
-            .put("pageSize", 999)
-            .put("query", new JSONObject()
-                .put("minimumPrice", criteres.minPrice)
-                .put("maximumPrice", criteres.maxPrice)
-                .put("minimumLivingArea", criteres.minSurface)
-                .put("maximumLivingArea", criteres.maxSurface)
-                .put("rooms", rangeArray(criteres.minRooms, criteres.maxRooms))
-                .put("bedrooms", rangeArray(criteres.minBedrooms, criteres.maxBedrooms))
-                .put("inseeCodes", new JSONArray(criteres.getInsees()))
-                .put("transactionType", (criteres.type == AnnonceType.Location) ? 1 : 2)
-                .put("realtyTypes", 3)
-                .put("sortBy", 0));
+        JSONObject jsonObject;
+        try {
+            jsonObject = new JSONObject()
+                    .put("pageIndex", 1)
+                    .put("pageSize", 999)
+                    .put("query", new JSONObject()
+                            .put("minimumPrice", criteres.minPrice)
+                            .put("maximumPrice", criteres.maxPrice)
+                            .put("minimumLivingArea", criteres.minSurface)
+                            .put("maximumLivingArea", criteres.maxSurface)
+                            .put("rooms", rangeArray(criteres.minRooms, criteres.maxRooms))
+                            .put("bedrooms", rangeArray(criteres.minBedrooms, criteres.maxBedrooms))
+                            .put("inseeCodes", new JSONArray(Arrays.asList(criteres.getInsees())))
+                            .put("transactionType", (criteres.type == AnnonceType.Location) ? 1 : 2)
+                            .put("realtyTypes", 3)
+                            .put("sortBy", 0));
+        } catch (JSONException e) {
+            return error(500, "Error creating JSON", e, logger);
+        }
 
         StringEntity entity;
         try {
