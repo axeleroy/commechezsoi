@@ -117,7 +117,7 @@ public class SeLogerSearchHandler extends AbstractCriteresHandler {
     }
 
     private JSONArray rangeArray(int min, int max) {
-        List<Integer> range = IntStream.range((min == 0) ? 1 : min, max).boxed().collect(Collectors.toList());
+        List<Integer> range = IntStream.range(min, max).boxed().collect(Collectors.toList());
         return new JSONArray(range);
     }
 
