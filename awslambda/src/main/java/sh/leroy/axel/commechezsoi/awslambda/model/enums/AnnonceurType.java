@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum AnnonceurType {
     Particulier("Particulier"),
     Agence("Agence"),
-    Both("Les deux");
+    Both("Both");
 
     private final String text;
 
