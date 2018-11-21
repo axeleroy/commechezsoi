@@ -29,7 +29,8 @@ export class Criteres {
       this.minBedrooms = 0;
       this.maxBedrooms = 0;
       this.type = AnnonceType.Location;
-      this.annonceur = AnnonceurType.Both;
+      // FIXME: Si Both, le type d'annonce n'est pas sélectionné sur la home
+      this.annonceur = AnnonceurType.Agence;
     }
   };
 }
