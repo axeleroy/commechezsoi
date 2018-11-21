@@ -28,8 +28,8 @@ export class CriteresService {
 
     if (this.leboncoin == null) this.leboncoin = true;
     if (this.seloger == null) this.seloger = true;
+    if (this.bienici == null) this.bienici = true;
     // TODO: modifier après ajout des services
-    if (this.bienici == null) this.bienici = false;
     if (this.logicimmo == null) this.logicimmo = false;
     if (this.pap == null) this.pap = false;
   }
