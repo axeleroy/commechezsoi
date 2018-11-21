@@ -13,6 +13,9 @@ export class FetchService {
               private client: HttpClient) { }
 
   fetch(): void {
+    if (this.parametersService.bienici) {
+      this.fetchBienIci();
+    }
     if (this.parametersService.leboncoin) {
       this.fetchLeboncoin();
     }
@@ -56,6 +59,18 @@ export class FetchService {
                 });
             }
           });
+      })
+  }
+
+  fetchBienIci(): void {
+    this.client.get<string>(environment.aws_lambda_endpoint + 'bieniciauthenticate')
+      .subscribe(token => {
+        this.client.post<Annonce[]>(environment.aws_lambda_endpoint + 'bienicisearch?token=' + token, this.parametersService.criteres)
+        .subscribe(annonces => {
+          for (const annonce of annonces) {
+            this.annoncesService.add(annonce);
+          }
+        });
       })
   }
 

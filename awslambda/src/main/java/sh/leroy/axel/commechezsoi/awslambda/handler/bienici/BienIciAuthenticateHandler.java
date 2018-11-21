@@ -52,7 +52,7 @@ public class BienIciAuthenticateHandler implements AbstractHandler {
 
             return ApiGatewayResponse.builder()
                 .setContentType(ContentType.TEXT_PLAIN.getMimeType())
-                .setRawBody(token)
+                .setObjectBody(token)
                 .build();
 
         } catch (IOException e) {

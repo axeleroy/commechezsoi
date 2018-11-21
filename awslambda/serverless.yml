@@ -10,20 +10,21 @@ functions:
   bieniciauthenticate:
     handler: sh.leroy.axel.commechezsoi.awslambda.handler.bienici.BienIciAuthenticateHandler
     events:
-    - http:
-        path: bieniciauthenticate
-        method: get
-        cors: true
+      - http:
+          path: bieniciauthenticate
+          method: get
+          cors: true
   bienicisearch:
     handler: sh.leroy.axel.commechezsoi.awslambda.handler.bienici.BienIciCriteresHandler
     events:
-    - http:
-        path: bienicisearch
-        method: post
-        request:
-          parameters:
-            queryparams:
-              token: true
+      - http:
+          path: bienicisearch
+          method: post
+          request:
+            parameters:
+              queryparams:
+                token: true
+          cors: true
   leboncoinlist:
     handler: sh.leroy.axel.commechezsoi.awslambda.handler.leboncoin.LeboncoinListHandler
     events:
