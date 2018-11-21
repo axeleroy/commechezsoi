@@ -59,7 +59,7 @@ public class SeLogerSearchHandler extends AbstractCriteresHandler {
         try {
             jsonObject = new JSONObject()
                     .put("pageIndex", 1)
-                    .put("pageSize", 999)
+                    .put("pageSize", 99)
                     .put("query", new JSONObject()
                             .put("minimumPrice", criteres.minPrice)
                             .put("maximumPrice", criteres.maxPrice)
