@@ -68,9 +68,10 @@
   <div class="row">
   <div class="col-sm">
     <h5>
-    <span *ngIf="criteresService.criteres.type == 0; then loyer else prix"></span>
-    <ng-template #loyer>Loyer</ng-template>
-    <ng-template #prix>Prix</ng-template>
+    <ng-container [ngSwitch]="criteresService.criteres.type">
+      <ng-template *ngSwitchCase="AnnonceType.Location">Loyer</ng-template>
+      <ng-template *ngSwitchCase="AnnonceType.Vente">Prix</ng-template>
+    </ng-container>
     </h5>
     <div class="input-group">
       <div class="input-group-prepend">
